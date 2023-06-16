@@ -333,7 +333,12 @@
     [darkView addGestureRecognizer:tap];
     
     UIView *whiteBgView         = [[UIView alloc] init];
-    whiteBgView.backgroundColor = [UIColor whiteColor];
+    if (@available(iOS 13.0, *)) {
+        whiteBgView.backgroundColor = [UIColor systemBackgroundColor];
+    } else {
+        // Fallback on earlier versions
+        whiteBgView.backgroundColor = [UIColor whiteColor];
+    }
     [bottomView addSubview:whiteBgView];
     [whiteBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(bottomView);
